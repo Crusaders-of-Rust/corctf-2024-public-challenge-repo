@@ -1,0 +1,31 @@
+name: two-wrongs
+author: quintec
+description: |-
+  ...make a right, right?
+
+  `{{ nc }}`
+
+flag: corctf{c0rr3ct_CORr3Ct!nG_9aenq}
+sortWeight: 65
+provide:
+  - two_wrongs.py
+containers:
+  two-wrongs:
+    build: .
+    ports:
+      - 5000
+    securityContext:
+      privileged: true
+    replicas: 1
+    resources:
+      limits:
+        memory: 1000Mi
+        cpu: 3000m
+      requests:
+        memory: 200Mi
+        cpu: 250m
+expose:
+  two-wrongs:
+    - target: 5000
+      tcp: 32422
+      healthContent: 'proof'

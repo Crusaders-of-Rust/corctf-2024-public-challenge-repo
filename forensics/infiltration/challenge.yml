@@ -1,0 +1,24 @@
+name: infiltration
+author: jammy
+description: |-
+  After successfully infiltrating the lemonthinker gang, we've obtained their current location - the UK.
+  We've attained some security logs from a gang member's PC, but need some help in answering information relating to these.
+  
+  `{{ nc }}`
+provide:
+  - security-logs.evtx
+flag: corctf{alw4y5_l3m0n_7h1nk_b3f0r3_y0u_c0mm1t_cr1m3}
+containers:
+  chall:
+    build: .
+    ports:
+      - 5000
+    securityContext:
+      privileged: true
+    replicas: 3
+sortWeight: 88
+expose:
+  chall:
+    - target: 5000
+      tcp: 32222
+      healthContent: 'Hello'

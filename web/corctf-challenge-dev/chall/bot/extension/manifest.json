@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "FizzBlock101",
+  "description": "Mandatory CoR management extension. Blocks subversive, unpatriotic elements.",
+  "version": "1.0",
+  "action": {
+    "default_icon": "fizzbuzz.png"
+  },
+  "permissions": [
+    "storage",
+	"tabs",
+	"declarativeNetRequest"
+  ],
+  "host_permissions": [
+	"<all_urls>"
+  ],
+  "background": {
+      "service_worker": "js/request_handler.js"
+  },
+  "content_scripts": [
+    {
+	  "js": [
+		"js/lodash.min.js",
+		"js/form_handler.js"
+	  ],
+	  "css": [
+	    "css/modal.css"
+	  ],
+	  "matches": [
+	    "<all_urls>"
+	  ]
+	}
+  ]
+}

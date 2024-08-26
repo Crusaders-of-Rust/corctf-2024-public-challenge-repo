@@ -1,0 +1,33 @@
+name: anglerfish
+author: emh
+description: |-
+  The devil of the sea strikes back!
+
+  (Part 2 out of 2)
+
+  `{{ nc }}`
+flag:
+  file: chall/flag.txt
+sortWeight: 45
+provide:
+  - chall/server.sage
+containers:
+  main:
+    build: chall
+    replicas: 1
+    ports:
+      - 5000
+    securityContext:
+      privileged: true
+    resources:
+      limits:
+        cpu: 3000m
+        memory: 1Gi
+      requests:
+        cpu: 100m
+        memory: 512Mi
+expose:
+  main:
+    - target: 5000
+      tcp: 31106
+      healthContent: 'I caught'

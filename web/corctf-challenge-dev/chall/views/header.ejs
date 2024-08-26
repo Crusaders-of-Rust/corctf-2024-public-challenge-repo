@@ -1,0 +1,44 @@
+<!-- this does not need to be a fragment lmao idek what im doing atp -->
+<!-- also i stole, like, the entire navbar from https://www.w3schools.com/css/css_navbar.asp -->
+<style>
+ul.navbar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li.navbar {
+  float: left;
+}
+
+li.navbar a.navbar {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+a.navbarimg {
+  display: block;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+}
+
+li.navbar a.navbar:hover {
+  background-color: #111;
+}
+</style>
+
+<ul class='navbar'>
+	<li class='navbar'><a class='navbarimg' href="/"><img src="/images/logo.png" style="height:50px; width:50px;"></a></li>
+  <% if (!user) { %>
+	<li class='navbar'><a class='navbar' href="/register">Register</a></li>
+	<li class='navbar'><a class='navbar' href="/login">Login</a></li>
+  <% } %>
+	<li class='navbar'><a class='navbar' href="/challenges">Challenges</a></li>
+	<li class='navbar'><a class='navbar' href="/create">Create Challenge</a></li>
+</ul>

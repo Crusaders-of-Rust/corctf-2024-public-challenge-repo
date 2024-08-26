@@ -1,0 +1,12 @@
+name: the-conspiracy
+author: jammy
+description: |
+  Our intelligence team created a chat app, and secretly distributed it to the lemonthinker gang.
+  We've given you the application source and a capture taken by one of our agents - can you uncover their plans?
+
+provide:
+  - challenge.pcap
+  - source.py
+
+flag: corctf{b@53d_af_f0r_th3_w1n}
+sortWeight: 98

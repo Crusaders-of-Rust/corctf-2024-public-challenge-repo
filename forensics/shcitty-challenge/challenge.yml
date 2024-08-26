@@ -1,0 +1,11 @@
+name: schitty-challenge
+author: plastic
+description: |-
+  We managed to capture the terminal output of a user while trying to obfuscate a shell script.
+
+provide:
+  - flag
+  - file_information.c
+  - terminal_output.txt
+flag: corctf{shell_script_compilers_are_not_safe_rc4_is_dumb_this_challenge_sucks}
+sortWeight: 42

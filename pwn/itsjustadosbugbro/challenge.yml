@@ -1,0 +1,23 @@
+name: its-just-a-dos-bug-bro
+author: FizzBuzz101
+flag: corctf{5p00ky_gh0sT!!!}
+description: |-
+  It's just a DOS bug bro, it ain't that deep. Push it out to prod! 
+
+  The challenge is hosted on a i5-8250U (8th generation, Kaby Lake).
+
+  +24 hour hint drop: make sure that you arent in powersave mode from performance\_governor, that often will break the intended solution.
+
+  The current remote timeout is 20 minutes.
+
+  connect with ssh: `ssh justadosbugbro@l.be.ax`
+
+  upload a file to `/tmp/exploit`: `ssh -t justadosbugbro@l.be.ax connect $(cat exploit | ssh l.be.ax upload)`
+
+sortWeight: 16
+provide:
+  - dist/bzImage
+  - dist/initramfs.cpio.gz
+  - dist/run.sh
+  - chall.c
+  - kconfig

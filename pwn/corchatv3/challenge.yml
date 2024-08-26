@@ -1,0 +1,29 @@
+name: corchat v3
+author: ryaagard
+description: |-
+  From denial of service to RCE! ...apparently
+
+  [Instancer]({{ instancer }})
+provide:
+  - chal.tar.gz
+sortWeight: 26
+flag:
+  file: flag.txt
+containers:
+  corchatv3:
+    build: .
+    ports:
+      - 5000
+    resources:
+      limits:
+        cpu: 500m
+        memory: 500Mi
+      requests:
+        cpu: 50m
+        memory: 500Mi
+expose:
+  corchatv3:
+    - target: 5000
+      http: corchat-v3
+instancer:
+  timeout: 600000

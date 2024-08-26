@@ -1,0 +1,23 @@
+name: format-string
+author: ryaagard
+description: |-
+  This is not a good challenge and you will learn nothing. There is no need to search for obscure format specifiers, the intended way is to use a very widely used specifier
+
+  `{{ nc }}`
+provide:
+  - chal.tar.gz
+sortWeight: 96
+flag:
+  file: flag.txt
+containers:
+  fmtstr:
+    build: .
+    ports:
+      - 5000
+    securityContext:
+      privileged: true
+expose:
+  fmtstr:
+    - target: 5000
+      tcp: 32323
+      healthContent: 1. printf

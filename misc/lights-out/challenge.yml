@@ -1,0 +1,25 @@
+name: lights-out
+author: plastic
+description: |-
+  You know the game. Solve the board quickly before a new one is generated.
+
+  `{{ nc }}`
+
+flag: corctf{freshman_math_class_throwback}
+provide:
+  - lights_out.py
+containers:
+  lights-out:
+    build: .
+    ports:
+      - 5000
+    securityContext:
+      privileged: true
+    replicas: 3
+    environment:
+      JAIL_ENV_FLAG: 'corctf{freshman_math_class_throwback}'
+expose:
+  lights-out:
+    - target: 5000
+      tcp: 32421
+      healthContent: 'Welcome'

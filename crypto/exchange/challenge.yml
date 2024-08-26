@@ -1,0 +1,39 @@
+name: exchange
+author: BrownieInMotion
+description: |-
+  I upgraded my exchange to support *flash swaps*! Check it out.
+  `{{ nc }}`
+flag: corctf{e9bd399c02a17e6f}
+sortWeight: 55
+provide:
+  - chall/contracts/Exchange.sol
+  - chall/contracts/Token.sol
+  - chall/contracts/Setup.sol
+containers:
+  chall:
+    build: chall
+    ports:
+      - 31337
+      - 8545
+    resources:
+      limits:
+        memory: 1500Mi
+        cpu: 2500m
+      requests:
+        memory: 200Mi
+        cpu: 250m
+    environment:
+      PORT: "31337"
+      HTTP_PORT: "8545"
+      FLAG: 'corctf{e9bd399c02a17e6f}'
+      ETH_RPC_URL: 'REDACTED'
+      SHARED_SECRET: REDACTED
+      PUBLIC_IP: 'https://exchange.be.ax'
+expose:
+  chall:
+    - target: 31337
+      tcp: 32412
+      healthContent: '1 -'
+    - target: 8545
+      http: exchange
+      healthContent: 'sandbox is running'

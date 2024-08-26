@@ -1,0 +1,9 @@
+name: roots
+author: pot
+description: |-
+    Check out this cool cryptosystem! Can you break it without the key?
+provide:
+  - main.py
+  - output.txt
+sortWeight: 75
+flag: corctf{I'm_r00t1ng_f0R_U!!!!!!!}

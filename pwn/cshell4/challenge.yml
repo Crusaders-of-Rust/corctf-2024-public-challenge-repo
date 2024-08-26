@@ -1,0 +1,23 @@
+name: cshell4
+author: '0x5a'
+description: |-
+  Pirates have stolen your treasure and encrypted them with their keys! Fortunately, we found a dev that was able to get an AIS terminal and modify it such that we can send messages to a nearby ship. Exploit the other ships and take their keys to reclaim your stolen treasure! Be sure not to crash any other boats because the Coast Guard will be very unhappy...
+
+  `{{ nc }}`
+sortWeight: 86
+flag:
+  file: release/flag.txt
+provide:
+  - chal.tar.gz
+containers:
+  cshell:
+    build: .
+    ports:
+      - 5000
+    securityContext:
+      privileged: true
+expose:
+  cshell:
+    - target: 5000
+      tcp: 32624
+      healthContent: 1. printf

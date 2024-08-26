@@ -1,0 +1,26 @@
+name: corchat x
+author: larry
+description: |-
+  have you ever wanted to talk to fizzbuzz101? well now you can using corchat x!
+
+  he has a secret too... try to find it
+
+  [Instancer]({{ instancer }})
+
+  [Admin Bot]({{ adminbot }})
+flag: corctf{fizzbuzz101_is_now_scheme_pilled_ps_he_made_me_change_this_flag}
+sortWeight: 14
+provide:
+  - corchat-x.tar.gz
+containers:
+  chall:
+    build: chall
+    ports:
+      - 8080
+expose:
+  chall:
+    - target: 8080
+      http: corchat-x
+instancer:
+  timeout: 600000
+adminbot: adminbot.js

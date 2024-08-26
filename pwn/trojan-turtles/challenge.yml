@@ -1,0 +1,33 @@
+name: trojan-turtles
+author: FizzBuzz101
+flag: corctf{KvM_3xpl01t5_@r3_5ucH_a_p@1n_1n_Th3_a55!!!}
+description: |-
+  A mysterious person who goes by Tia Jan recently replaced our nested hypervisor's Intel KVM driver
+  with a new driver. Can you take a look at this and see if our systems have been compromised?
+
+  Note that the goal of this challenge is to escape from the L2 guest to the root user on the L1 guest.
+  You will need an Intel system with modern VMX extensions to debug this challenge.
+
+  The L1 guest is running a 6.9.0 kernel with the provided kconfig below. The L2 guest is running a 
+  5.15.0-107 Ubuntu HWE kernel. You can retrieve the necessary headers from the following links:
+  
+    - [https://packages.ubuntu.com/focal/linux-headers-5.15.0-107-generic](https://packages.ubuntu.com/focal/linux-headers-5.15.0-107-generic)
+    
+    - [https://packages.ubuntu.com/focal-updates/linux-hwe-5.15-headers-5.15.0-107](https://packages.ubuntu.com/focal-updates/linux-hwe-5.15-headers-5.15.0-107)
+
+  You can download the 6.9.0 kernel source at [https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.9.tar.xz](https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.9.tar.xz)
+
+  connect with ssh: `ssh trojan-turtles@i.be.ax`
+
+  upload a file to `/tmp/exploit`: `ssh -t trojan-turtles@i.be.ax connect $(cat exploit | ssh i.be.ax upload)`
+
+sortWeight: 56
+provide:
+  - linux-headers-5.15.0-107-generic_5.15.0-107.117~20.04.1_amd64.deb
+  - linux-hwe-5.15-headers-5.15.0-107_5.15.0-107.117~20.04.1_all.deb
+  - run.sh
+  - dist/chall.qcow2
+  - kconfig
+  - remote/bzImage
+  - kvm-intel-new.ko
+  - kvm-intel-original.ko

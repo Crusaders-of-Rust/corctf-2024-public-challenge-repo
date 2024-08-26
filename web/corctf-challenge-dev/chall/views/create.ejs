@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/css/awsm.min.css">
+    <title>Create | CoR Challenge Development Portal</title>
+</head>
+<body>
+	<%- include('header') %>
+    <h1>Create a New Challenge</h1>
+    <form id="challengeForm">
+        <div>
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+        <div>
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required></textarea>
+        </div>
+        <button type="submit">Create</button>
+    </form>
+	<script nonce="<%= nonce %>">
+        document.getElementById('challengeForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const title = event.target.title.value;
+            const description = event.target.description.value;
+            const response = await fetch('/api/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ title, description })
+            });
+            const result = await response.json();
+            if (result.success) {
+                window.location.href = '/challenges';
+            } else {
+                console.error('Error creating challenge:', result.error);
+            }
+        });
+    </script>
+</body>
+</html>

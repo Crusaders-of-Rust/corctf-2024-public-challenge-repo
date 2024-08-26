@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/axist.min.css">
+	<title>corchat X</title>
+	<script src="/chat.js" type="module" async></script>
+</head>
+<body data-username="{{ username }}">
+<h1>corchat X</h1>
+<button id="connect">Connect as {{ username }}</button>
+<div id="chat" hidden style="background-color: var(--lighter-gray); padding: 15px;">
+	<div id="messages" style="height: 800px; overflow: auto;">
+
+	</div>
+	<form id="messageForm">
+		<input id="message" style="border: 1px solid var(--light-gray); width: 100%" placeholder="Message">
+	</form>
+</div>
+</body>
+</html>

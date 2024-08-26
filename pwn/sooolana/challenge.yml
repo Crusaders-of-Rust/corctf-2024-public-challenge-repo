@@ -1,0 +1,24 @@
+name: sooolana
+author: 'plop0'
+description: |-
+  rbpf is an awesome, well-written and safe 🚀🔒 JIT compiler!
+
+  `{{ nc }}`
+sortWeight: 35
+flag:
+  file: flag.txt
+provide:
+  - dist.rar
+containers:
+  sooolana:
+    build: .
+    ports:
+      - 5000
+    securityContext:
+      privileged: true
+expose:
+  sooolana:
+    - target: 5000
+      tcp: 32630
+#      healthContent: 1. printf
+

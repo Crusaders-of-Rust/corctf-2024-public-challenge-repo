@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/css/awsm.min.css">
+	<title>Challenges | CoR Challenge Development Portal</title>
+</head>
+<body>
+	<%- include('header') %>
+	
+	<h2>Posts</h2>
+	<ul id="challenge-list"></ul>
+	<script nonce="<%= nonce %>">
+        document.addEventListener("DOMContentLoaded", async () => {
+            try {
+                const response = await fetch('/api/challenges', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    const challengeList = document.getElementById('challenge-list');
+                    result.data.forEach(challenge => {
+                        const listItem = document.createElement('li');
+                        const challengeLink = document.createElement('a');
+                        challengeLink.href = `/challenge/${challenge.id}`;
+                        challengeLink.textContent = challenge.title;
+                        listItem.appendChild(challengeLink);
+                        challengeList.appendChild(listItem);
+                    });
+                } else {
+                    console.error(result.error);
+                }
+            } catch (error) {
+                console.error('Error fetching challenges:', error);
+            }
+        });
+    </script>
+</body>
+</html>

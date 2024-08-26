@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CorChat v3</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+    <style>
+        body {
+            background: #000;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .chat-container {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            border: 2px solid #00ff00;
+            margin: 10px;
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .message {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: rgba(0, 0, 0, 0.5);
+            word-wrap: break-word;
+            box-shadow: 0 0 10px #00ff00;
+        }
+
+        .input-container {
+            display: flex;
+            padding: 10px;
+            border-top: 2px solid #00ff00;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .input-container input[type="text"] {
+            flex-grow: 1;
+            padding: 10px;
+            border: 2px solid #00ff00;
+            border-radius: 5px;
+            background: #000;
+            color: #00ff00;
+            outline: none;
+        }
+
+        .input-container button {
+            margin-left: 10px;
+            padding: 10px 20px;
+            border: 2px solid #00ff00;
+            border-radius: 5px;
+            background-color: #000;
+            color: #00ff00;
+            cursor: pointer;
+            box-shadow: 0 0 10px #00ff00;
+            outline: none;
+        }
+
+        .input-container button:hover {
+            background-color: #00ff00;
+            color: #000;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.9; }
+        }
+
+        .chat-container, .input-container {
+            animation: flicker 0.15s infinite;
+        }
+
+        .scanlines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 50%);
+            background-size: 100% 2px;
+            pointer-events: none;
+            opacity: 0.2;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container" id="chat-container">
+    </div>
+    <div class="input-container">
+        <input type="text" id="message_input" placeholder="Type a message...">
+        <button onclick="send_message()">Send</button>
+    </div>
+    <div class="scanlines"></div>
+
+    <script>
+        let socket = io();
+
+        function show_message(msg) {
+            const chat_container = document.getElementById("chat-container");
+            const msg_input = document.getElementById("message_input");
+
+            const msg_elem = document.createElement("div");
+            msg_elem.className = "message";
+            msg_elem.textContent = msg.msg;
+            
+            chat_container.appendChild(msg_elem);
+            chat_container.scrollTop = chat_container.scrollHeight;
+
+            msg_input.value = '';
+            msg_input.focus();
+        }
+
+        function send_message() {
+            const msg_input = document.getElementById("message_input");
+            const msg_text = msg_input.value.trim();
+
+            socket.emit("new_message", {
+                msg: msg_text
+            });
+        }
+
+        socket.on("recv_message", (msg) => {
+            show_message(msg);
+        });
+
+        document.getElementById("message_input").addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                send_message();
+            }
+        });
+    </script>
+</body>
+</html>

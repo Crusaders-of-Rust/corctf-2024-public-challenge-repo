@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Rock, Paper, Scissors!</title>
+	<style>* { font-family: sans-serif; }</style>
+</head>
+<body style="margin: 0; width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center">
+<div id="main" style="text-align: center;">
+	<h1 style="font-size: 5em; margin: 0px;" id="title">Rock, Paper, Scissors!</h1>
+	<h1 style="font-size: 10em; margin: 0px; height: 1.5em" id="current">🪨</h1>
+	<br>
+	<button style="font-size: 5em; height: 1.5em" onclick="play('🪨')" disabled>🪨</button>
+	<button style="font-size: 5em; height: 1.5em" onclick="play('📃')" disabled>📃</button>
+	<button style="font-size: 5em; height: 1.5em" onclick="play('✂️')" disabled>✂️</button>
+	<br><br>
+	<span hidden>Logged in as <b id="username"></b> | Score: <b id="score">0</b> | </span><a href="/scoreboard.html">Scoreboard</a>
+</div>
+</body>
+<script src="main.js" type="module"></script>
+</html>

